@@ -18,8 +18,6 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
-
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
   }
 
   override fun willResignActive() {
@@ -32,4 +30,5 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
    * Presenter interface implemented by this RIB's view.
    */
   interface LoggedOutPresenter
+  
 }
