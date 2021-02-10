@@ -6,10 +6,11 @@ import com.dionep.ribscage.backend.tables.Users
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class UsersRepository {
 
-    suspend fun getUser(id: Int): User? = dbQuery {
+    fun getUser(id: Int): User? = transaction {
         Users.select { Users.id eq id }
             .mapNotNull { toUser(it) }
             .singleOrNull()

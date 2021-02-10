@@ -1,9 +1,13 @@
 package com.dionep.ribscage.backend
 
+import com.dionep.ribscage.backend.config.DatabaseConfig
+import com.dionep.ribscage.backend.repo.UsersRepository
 import com.dionep.ribscage.backend.routes.auth
 import com.google.gson.GsonBuilder
+import config.JWTConfig
 import io.ktor.application.*
 import io.ktor.auth.*
+import io.ktor.auth.jwt.*
 import io.ktor.features.*
 import io.ktor.gson.*
 import io.ktor.http.*
@@ -38,9 +42,14 @@ fun Application.module() {
         auth()
     }
 
+    DatabaseConfig.connect()
+
     install(Authentication) {
-        basic {
-            realm
+        val repo = UsersRepository()
+        jwt {
+            verifier(JWTConfig.verifier)
+            realm = "ktor.io"
+            validate { it.payload.getClaim("id").asInt()?.let(repo::getUser) }
         }
     }
 }
