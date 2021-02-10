@@ -1,10 +1,12 @@
 package com.dionep.ribscage.backend
 
+import com.dionep.ribscage.backend.routes.auth
 import com.google.gson.GsonBuilder
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
 import io.ktor.http.*
+import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 
@@ -31,5 +33,7 @@ fun Application.module() {
 
     install(DefaultHeaders)
     install(CallLogging)
-
+    install(Routing) {
+        auth()
+    }
 }
