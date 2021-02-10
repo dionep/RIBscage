@@ -8,10 +8,13 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 fun Route.auth() {
+
     post("/login") {
         val request = call.receive<LoginResult>()
         if (request.name == "test")
             call.respond(HttpStatusCode.OK)
         else call.respond(HttpStatusCode.Unauthorized)
     }
+
+
 }

@@ -13,6 +13,8 @@ dependencies {
     implementation(Dependencies.Backend.Ktor.Netty)
     implementation(Dependencies.Backend.Ktor.ServerCore)
     implementation(Dependencies.Backend.Ktor.Gson)
+    implementation(Dependencies.Backend.Ktor.Auth)
+    implementation(Dependencies.Backend.Ktor.Jwt)
     implementation(Dependencies.Backend.Database.JetbrainsExposed.Exposed)
     implementation(Dependencies.Backend.Database.H2Database.H2)
     implementation(Dependencies.Backend.Database.Zaxxer.HikariCP)

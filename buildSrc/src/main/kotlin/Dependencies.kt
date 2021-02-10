@@ -128,6 +128,9 @@ object Dependencies {
             object ServerCore : Dependency(group = this, name = "ktor-server-core", version = version)
             object Netty : Dependency(group = this, name = "ktor-server-netty", version = version)
             object Gson : Dependency(group = this, name = "ktor-gson", version = version)
+
+            object Auth : Dependency(group = this, name = "ktor-auth", version = version)
+            object Jwt : Dependency(group = this, name = "ktor-auth-jwt", version = version)
         }
 
         object Database {
