@@ -1,3 +1,5 @@
+package com.dionep.mvi
+
 data class SideEffect<out Msg, out News>(
     val msg: Msg? = null,
     val news: News? = null
