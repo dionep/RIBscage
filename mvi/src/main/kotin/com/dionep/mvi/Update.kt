@@ -1,5 +1,3 @@
-package com.dionep.mvi
-
 data class Update<State, Cmd>(
     val state: State? = null,
     val cmd: Cmd? = null
