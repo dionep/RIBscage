@@ -1,7 +1,5 @@
 package com.dionep.ribscage.logged_out
 
-import android.view.View
-
 import com.uber.rib.core.ViewRouter
 
 /**

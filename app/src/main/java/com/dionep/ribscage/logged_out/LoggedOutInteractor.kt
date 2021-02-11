@@ -23,7 +23,6 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
   override fun willResignActive() {
     super.willResignActive()
 
-    // TODO: Perform any required clean up here, or delete this method entirely if not needed.
   }
 
   /**
