@@ -21,7 +21,7 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
         .view(view)
         .interactor(interactor)
         .build()
-    return component.loggedoutRouter()
+    return component.loggedOutRouter()
   }
 
   override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): LoggedOutView =
@@ -50,6 +50,14 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
           interactor: LoggedOutInteractor): LoggedOutRouter {
         return LoggedOutRouter(view, interactor, component)
       }
+
+      @LoggedOutScope
+      @Provides
+      @JvmStatic
+      internal fun presenter(
+        view: LoggedOutView
+      ) = LoggedOutPresenterImpl(view)
+
     }
 
   }
@@ -72,7 +80,7 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
   }
 
   interface BuilderComponent {
-    fun loggedoutRouter(): LoggedOutRouter
+    fun loggedOutRouter(): LoggedOutRouter
   }
 
   @Scope

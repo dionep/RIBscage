@@ -28,6 +28,12 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
   /**
    * Presenter interface implemented by this RIB's view.
    */
-  interface LoggedOutPresenter
+  interface LoggedOutPresenter {
+
+    sealed class UiEvents {
+      data class LogIn(val name: String?, val password: String?) : UiEvents()
+    }
+
+  }
   
 }
