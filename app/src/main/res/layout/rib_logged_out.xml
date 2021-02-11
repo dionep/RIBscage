@@ -1,42 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dionep.ribscage.ui.logged_out.LoggedOutView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        app:title="@string/registration"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="?actionBarSize"/>
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            app:title="@string/registration"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_name"
+        android:hint="@string/enter_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"/>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_name"
-            android:hint="@string/enter_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_password"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"/>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_password"
-            android:hint="@string/enter_password"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"/>
+    <Button
+        android:id="@+id/login_button"
+        android:text="@string/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"/>
 
-        <Button
-            android:id="@+id/login_button"
-            android:text="@string/register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"/>
-
-    </LinearLayout>
-
-</com.dionep.ribscage.ui.logged_out.LoggedOutView>
+</LinearLayout>

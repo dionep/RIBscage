@@ -3,6 +3,7 @@ package com.dionep.ribscage.ui.logged_out
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dionep.ribscage.R
+import com.dionep.ribscage.data.ApiClient
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -25,18 +26,14 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
   }
 
   override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): LoggedOutView =
-    inflater.inflate(R.layout.rib_logged_out, parentViewGroup, false) as LoggedOutView
+    LoggedOutView(parentViewGroup.context)
 
   interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
+    fun apiClient(): ApiClient
   }
 
   @dagger.Module
   abstract class Module {
-
-    @LoggedOutScope
-    @Binds
-    internal abstract fun presenter(view: LoggedOutView): LoggedOutInteractor.LoggedOutPresenter
 
     @dagger.Module
     companion object {
@@ -54,9 +51,17 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
       @LoggedOutScope
       @Provides
       @JvmStatic
+      internal fun feature(
+        apiClient: ApiClient
+      ): LoggedOutFeature = LoggedOutFeature(apiClient)
+
+      @LoggedOutScope
+      @Provides
+      @JvmStatic
       internal fun presenter(
-        view: LoggedOutView
-      ) = LoggedOutPresenterImpl(view)
+        view: LoggedOutView,
+        interactor: LoggedOutInteractor
+      ): LoggedOutInteractor.LoggedOutPresenter = LoggedOutPresenterImpl(view, interactor)
 
     }
 
