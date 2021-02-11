@@ -1,4 +1,4 @@
-package com.dionep.ribscage.logged_out
+package com.dionep.ribscage.ui.logged_out
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

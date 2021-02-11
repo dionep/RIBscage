@@ -3,7 +3,7 @@ package com.dionep.ribscage.root
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dionep.ribscage.R
-import com.dionep.ribscage.logged_out.LoggedOutBuilder
+import com.dionep.ribscage.ui.logged_out.LoggedOutBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds

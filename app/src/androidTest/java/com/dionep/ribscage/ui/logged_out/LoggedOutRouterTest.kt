@@ -1,4 +1,4 @@
-package com.dionep.ribscage.logged_out
+package com.dionep.ribscage.ui.logged_out
 
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.RouterHelper

@@ -1,8 +1,7 @@
-package com.dionep.ribscage.logged_out
+package com.dionep.ribscage.ui.logged_out
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.widget.FrameLayout
 
 /**
