@@ -17,7 +17,7 @@ class LoggedOutFeature(
         when (msg) {
             is Msg.LogIn ->
                 Update(
-                    state.copy(isLoading = false),
+                    state.copy(isLoading = true),
                     Cmd.LogIn(
                         name = msg.name,
                         password = msg.password
