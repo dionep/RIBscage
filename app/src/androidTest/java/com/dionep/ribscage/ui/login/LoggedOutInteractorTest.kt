@@ -1,4 +1,4 @@
-package com.dionep.ribscage.ui.logged_out
+package com.dionep.ribscage.ui.login
 
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.InteractorHelper
@@ -10,10 +10,10 @@ import org.mockito.MockitoAnnotations
 
 class LoggedOutInteractorTest : RibTestBasePlaceholder() {
 
-  @Mock internal lateinit var presenter: LoggedOutInteractor.LoggedOutPresenter
-  @Mock internal lateinit var router: LoggedOutRouter
+  @Mock internal lateinit var presenter: LoginInteractor.LoggedOutPresenter
+  @Mock internal lateinit var router: LoginRouter
 
-  private var interactor: LoggedOutInteractor? = null
+  private var interactor: LoginInteractor? = null
 
   @Before
   fun setup() {
@@ -28,7 +28,7 @@ class LoggedOutInteractorTest : RibTestBasePlaceholder() {
   @Test
   fun anExampleTest_withSomeConditions_shouldPass() {
     // Use InteractorHelper to drive your interactor's lifecycle.
-    InteractorHelper.attach<LoggedOutInteractor.LoggedOutPresenter, LoggedOutRouter>(interactor!!, presenter, router, null)
+    InteractorHelper.attach<LoginInteractor.LoggedOutPresenter, LoginRouter>(interactor!!, presenter, router, null)
     InteractorHelper.detach(interactor!!)
 
     throw RuntimeException("Remove this test and add real tests.")

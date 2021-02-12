@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dionep.ribscage.R
 import com.dionep.ribscage.data.ApiClient
-import com.dionep.ribscage.ui.logged_out.LoggedOutBuilder
+import com.dionep.ribscage.ui.login.LoginBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -51,7 +51,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
           view: RootView,
           interactor: RootInteractor
       ): RootRouter {
-        return RootRouter(view, interactor, component, LoggedOutBuilder(component))
+        return RootRouter(view, interactor, component, LoginBuilder(component))
       }
     }
 
@@ -64,7 +64,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
   )
   interface Component :
     InteractorBaseComponent<RootInteractor>,
-    LoggedOutBuilder.ParentComponent,
+    LoginBuilder.ParentComponent,
     BuilderComponent {
 
     @dagger.Component.Builder

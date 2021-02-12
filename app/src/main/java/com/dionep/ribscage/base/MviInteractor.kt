@@ -7,6 +7,7 @@ import com.uber.rib.core.ViewRouter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Suppress("FINITE_BOUNDS_VIOLATION_IN_JAVA")

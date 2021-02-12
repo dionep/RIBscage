@@ -1,16 +1,15 @@
-package com.dionep.ribscage.ui.logged_out
+package com.dionep.ribscage.ui.login
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.dionep.ribscage.databinding.RibLoggedOutBinding
-import com.dionep.ribscage.ui.logged_out.LoggedOutInteractor.*
 
 /**
  * Top level view for {@link LoggedOutBuilder.LoggedOutScope}.
  */
-class LoggedOutView @JvmOverloads constructor(
+class LoginView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0

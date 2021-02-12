@@ -1,4 +1,4 @@
-package com.dionep.ribscage.ui.logged_out
+package com.dionep.ribscage.ui.login
 
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.RouterHelper
@@ -10,17 +10,17 @@ import org.mockito.MockitoAnnotations
 
 class LoggedOutRouterTest : RibTestBasePlaceholder() {
 
-  @Mock internal lateinit var component: LoggedOutBuilder.Component
-  @Mock internal lateinit var interactor: LoggedOutInteractor
-  @Mock internal lateinit var view: LoggedOutView
+  @Mock internal lateinit var component: LoginBuilder.Component
+  @Mock internal lateinit var interactor: LoginInteractor
+  @Mock internal lateinit var view: LoginView
 
-  private var router: LoggedOutRouter? = null
+  private var router: LoginRouter? = null
 
   @Before
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    router = LoggedOutRouter(view, interactor, component)
+    router = LoginRouter(view, interactor, component)
   }
 
   /**

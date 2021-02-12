@@ -1,15 +1,15 @@
-package com.dionep.ribscage.ui.logged_out
+package com.dionep.ribscage.ui.login
 
 import com.dionep.mvi.Feature
 import com.dionep.mvi.SideEffect
 import com.dionep.mvi.Update
 import com.dionep.ribscage.data.ApiClient
-import com.dionep.ribscage.ui.logged_out.LoggedOutFeature.*
+import com.dionep.ribscage.ui.login.LoginFeature.*
 import com.dionep.ribscage.utils.awaitFolding
 import com.dionep.ribscage.utils.jsonRequestBodyOf
 import kotlinx.coroutines.flow.flowOf
 
-class LoggedOutFeature(
+class LoginFeature(
     apiClient: ApiClient
 ) : Feature<State, Cmd, Msg, News>(
     initialState = State(),

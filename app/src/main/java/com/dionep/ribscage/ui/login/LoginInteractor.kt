@@ -1,8 +1,8 @@
-package com.dionep.ribscage.ui.logged_out
+package com.dionep.ribscage.ui.login
 
 import com.dionep.ribscage.base.MviInteractor
-import com.dionep.ribscage.ui.logged_out.LoggedOutFeature.*
-import com.dionep.ribscage.ui.logged_out.LoggedOutInteractor.*
+import com.dionep.ribscage.ui.login.LoginFeature.*
+import com.dionep.ribscage.ui.login.LoginInteractor.*
 import com.uber.rib.core.*
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -14,13 +14,13 @@ import javax.inject.Inject
  */
 
 @RibInteractor
-class LoggedOutInteractor : MviInteractor<LoggedOutPresenter, LoggedOutRouter, State, News>() {
+class LoginInteractor : MviInteractor<LoggedOutPresenter, LoginRouter, State, News>() {
 
   @Inject
   lateinit var presenter: LoggedOutPresenter
 
   @Inject
-  override lateinit var feature: LoggedOutFeature
+  override lateinit var feature: LoginFeature
 
   fun acceptUiEvent(uiEvents: LoggedOutPresenter.UiEvents) {
     when(uiEvents) {

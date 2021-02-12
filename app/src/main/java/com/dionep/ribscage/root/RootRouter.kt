@@ -1,6 +1,6 @@
 package com.dionep.ribscage.root
 
-import com.dionep.ribscage.ui.logged_out.LoggedOutBuilder
+import com.dionep.ribscage.ui.login.LoginBuilder
 
 import com.uber.rib.core.ViewRouter
 
@@ -13,7 +13,7 @@ class RootRouter(
     view: RootView,
     interactor: RootInteractor,
     component: RootBuilder.Component,
-    private val loggedOutBuilder: LoggedOutBuilder
+    private val loggedOutBuilder: LoginBuilder
 ) : ViewRouter<RootView, RootInteractor, RootBuilder.Component>(view, interactor, component) {
 
     fun attachLoggedOut() {

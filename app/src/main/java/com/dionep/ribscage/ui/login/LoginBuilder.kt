@@ -1,23 +1,21 @@
-package com.dionep.ribscage.ui.logged_out
+package com.dionep.ribscage.ui.login
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.dionep.ribscage.R
 import com.dionep.ribscage.data.ApiClient
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
-import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
 import javax.inject.Qualifier
 import javax.inject.Scope
 
-class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView, LoggedOutRouter, LoggedOutBuilder.ParentComponent>(dependency) {
+class LoginBuilder(dependency: ParentComponent) : ViewBuilder<LoginView, LoginRouter, LoginBuilder.ParentComponent>(dependency) {
 
-  fun build(parentViewGroup: ViewGroup): LoggedOutRouter {
+  fun build(parentViewGroup: ViewGroup): LoginRouter {
     val view = createView(parentViewGroup)
-    val interactor = LoggedOutInteractor()
-    val component = DaggerLoggedOutBuilder_Component.builder()
+    val interactor = LoginInteractor()
+    val component = DaggerLoginBuilder_Component.builder()
         .parentComponent(dependency)
         .view(view)
         .interactor(interactor)
@@ -25,8 +23,8 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
     return component.loggedOutRouter()
   }
 
-  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): LoggedOutView =
-    LoggedOutView(parentViewGroup.context)
+  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): LoginView =
+    LoginView(parentViewGroup.context)
 
   interface ParentComponent {
     fun apiClient(): ApiClient
@@ -43,9 +41,9 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
       @JvmStatic
       internal fun router(
           component: Component,
-          view: LoggedOutView,
-          interactor: LoggedOutInteractor): LoggedOutRouter {
-        return LoggedOutRouter(view, interactor, component)
+          view: LoginView,
+          interactor: LoginInteractor): LoginRouter {
+        return LoginRouter(view, interactor, component)
       }
 
       @LoggedOutScope
@@ -53,15 +51,15 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
       @JvmStatic
       internal fun feature(
         apiClient: ApiClient
-      ): LoggedOutFeature = LoggedOutFeature(apiClient)
+      ): LoginFeature = LoginFeature(apiClient)
 
       @LoggedOutScope
       @Provides
       @JvmStatic
       internal fun presenter(
-        view: LoggedOutView,
-        interactor: LoggedOutInteractor
-      ): LoggedOutInteractor.LoggedOutPresenter = LoggedOutPresenterImpl(view, interactor)
+          view: LoginView,
+          interactor: LoginInteractor
+      ): LoginInteractor.LoggedOutPresenter = LoginPresenterImpl(view, interactor)
 
     }
 
@@ -69,15 +67,15 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
 
   @LoggedOutScope
   @dagger.Component(modules = [Module::class], dependencies = [ParentComponent::class])
-  interface Component : InteractorBaseComponent<LoggedOutInteractor>, BuilderComponent {
+  interface Component : InteractorBaseComponent<LoginInteractor>, BuilderComponent {
 
     @dagger.Component.Builder
     interface Builder {
       @BindsInstance
-      fun interactor(interactor: LoggedOutInteractor): Builder
+      fun interactor(interactor: LoginInteractor): Builder
 
       @BindsInstance
-      fun view(view: LoggedOutView): Builder
+      fun view(view: LoginView): Builder
 
       fun parentComponent(component: ParentComponent): Builder
       fun build(): Component
@@ -85,7 +83,7 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
   }
 
   interface BuilderComponent {
-    fun loggedOutRouter(): LoggedOutRouter
+    fun loggedOutRouter(): LoginRouter
   }
 
   @Scope
