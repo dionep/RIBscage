@@ -1,7 +1,9 @@
 package com.dionep.ribscage.di
 
+import android.content.Context
 import com.dionep.ribscage.App
 import com.dionep.ribscage.AppActivity
+import com.dionep.ribscage.data.Prefs
 import com.dionep.ribscage.di.modules.NetworkModule
 import com.dionep.ribscage.root.RootBuilder
 import com.google.gson.Gson
@@ -40,5 +42,12 @@ object AppModule {
     @Provides
     @Singleton
     fun gson(): Gson = GsonBuilder().create()
+
+    @Provides
+    @Singleton
+    fun prefs(
+        context: Context,
+        gson: Gson
+    ): Prefs = Prefs(context, gson)
 
 }
