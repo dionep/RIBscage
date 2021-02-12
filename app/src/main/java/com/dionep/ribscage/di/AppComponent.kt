@@ -41,6 +41,10 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun context(application: App): Context = application
+
+    @Provides
+    @Singleton
     fun gson(): Gson = GsonBuilder().create()
 
     @Provides
