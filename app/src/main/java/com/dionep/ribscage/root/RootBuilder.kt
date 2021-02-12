@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dionep.ribscage.R
 import com.dionep.ribscage.data.ApiClient
+import com.dionep.ribscage.data.Prefs
 import com.dionep.ribscage.ui.login.LoginBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
@@ -31,6 +32,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
 
   interface ParentComponent {
     fun apiClient(): ApiClient
+    fun prefs(): Prefs
   }
 
   @dagger.Module

@@ -4,13 +4,15 @@ import com.dionep.mvi.Feature
 import com.dionep.mvi.SideEffect
 import com.dionep.mvi.Update
 import com.dionep.ribscage.data.ApiClient
+import com.dionep.ribscage.data.Prefs
 import com.dionep.ribscage.ui.login.LoginFeature.*
 import com.dionep.ribscage.utils.awaitFolding
 import com.dionep.ribscage.utils.jsonRequestBodyOf
 import kotlinx.coroutines.flow.flowOf
 
 class LoginFeature(
-    apiClient: ApiClient
+    apiClient: ApiClient,
+    prefs: Prefs
 ) : Feature<State, Cmd, Msg, News>(
     initialState = State(),
     reducer = { msg, state ->
@@ -35,7 +37,10 @@ class LoginFeature(
                         "password" to cmd.password
                     )
                 ).awaitFolding(
-                    { SideEffect(Msg.StopLoading, News.LoginSuccess) },
+                    {
+                        prefs.authToken = it
+                        SideEffect(Msg.StopLoading, News.LoginSuccess)
+                    },
                     { SideEffect(Msg.StopLoading, News.Failure(it.message ?: "Error occured")) }
                 )
             )

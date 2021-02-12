@@ -3,6 +3,7 @@ package com.dionep.ribscage.ui.login
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dionep.ribscage.data.ApiClient
+import com.dionep.ribscage.data.Prefs
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.BindsInstance
@@ -28,6 +29,7 @@ class LoginBuilder(dependency: ParentComponent) : ViewBuilder<LoginView, LoginRo
 
   interface ParentComponent {
     fun apiClient(): ApiClient
+    fun prefs(): Prefs
   }
 
   @dagger.Module
@@ -50,8 +52,9 @@ class LoginBuilder(dependency: ParentComponent) : ViewBuilder<LoginView, LoginRo
       @Provides
       @JvmStatic
       internal fun feature(
-        apiClient: ApiClient
-      ): LoginFeature = LoginFeature(apiClient)
+        apiClient: ApiClient,
+        prefs: Prefs
+      ): LoginFeature = LoginFeature(apiClient, prefs)
 
       @LoggedOutScope
       @Provides
