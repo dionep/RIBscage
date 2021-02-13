@@ -19,8 +19,8 @@ class LoginFeature(
         when (msg) {
             is Msg.LogIn ->
                 Update(
-                    state.copy(isLoading = true),
-                    Cmd.LogIn(
+                    state = state.copy(isLoading = true),
+                    cmd = Cmd.LogIn(
                         name = msg.name,
                         password = msg.password
                     )

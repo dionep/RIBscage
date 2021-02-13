@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations
 
 class LoggedOutInteractorTest : RibTestBasePlaceholder() {
 
-  @Mock internal lateinit var presenter: LoginInteractor.LoggedOutPresenter
+  @Mock internal lateinit var presenter: LoginInteractor.LoginPresenter
   @Mock internal lateinit var router: LoginRouter
 
   private var interactor: LoginInteractor? = null
@@ -28,7 +28,7 @@ class LoggedOutInteractorTest : RibTestBasePlaceholder() {
   @Test
   fun anExampleTest_withSomeConditions_shouldPass() {
     // Use InteractorHelper to drive your interactor's lifecycle.
-    InteractorHelper.attach<LoginInteractor.LoggedOutPresenter, LoginRouter>(interactor!!, presenter, router, null)
+    InteractorHelper.attach<LoginInteractor.LoginPresenter, LoginRouter>(interactor!!, presenter, router, null)
     InteractorHelper.detach(interactor!!)
 
     throw RuntimeException("Remove this test and add real tests.")

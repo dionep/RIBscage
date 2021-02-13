@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 abstract class MviInteractor<P, R: ViewRouter<*, *, *>, State, News>: Interactor<P, R>() {
 
   private val job = SupervisorJob()
-  private val coroutineScope: CoroutineScope
+  val coroutineScope: CoroutineScope
     get() = CoroutineScope(Dispatchers.Main + job)
 
   abstract val feature: Feature<State, *, *, News>

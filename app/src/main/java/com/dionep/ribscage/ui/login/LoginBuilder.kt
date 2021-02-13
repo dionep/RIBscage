@@ -60,9 +60,8 @@ class LoginBuilder(dependency: ParentComponent) : ViewBuilder<LoginView, LoginRo
       @Provides
       @JvmStatic
       internal fun presenter(
-          view: LoginView,
-          interactor: LoginInteractor
-      ): LoginInteractor.LoggedOutPresenter = LoginPresenterImpl(view, interactor)
+          view: LoginView
+      ): LoginInteractor.LoginPresenter = view
 
     }
 

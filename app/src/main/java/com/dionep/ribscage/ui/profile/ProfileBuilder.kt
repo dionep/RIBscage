@@ -2,6 +2,7 @@ package com.dionep.ribscage.ui.profile
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.dionep.ribscage.data.ApiClient
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -34,14 +35,11 @@ class ProfileBuilder(dependency: ParentComponent) : ViewBuilder<ProfileView, Pro
     return component.profileRouter()
   }
 
-  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): ProfileView? {
-    // TODO: Inflate a new view using the provided inflater, or create a new view programatically using the
-    // provided context from the parentViewGroup.
-    return null
-  }
+  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): ProfileView =
+      ProfileView(parentViewGroup.context)
 
   interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
+    fun apiClient(): ApiClient
   }
 
   @dagger.Module
@@ -63,9 +61,15 @@ class ProfileBuilder(dependency: ParentComponent) : ViewBuilder<ProfileView, Pro
           interactor: ProfileInteractor): ProfileRouter {
         return ProfileRouter(view, interactor, component)
       }
+
+      @ProfileScope
+      @Provides
+      @JvmStatic
+      internal fun feature(
+          apiClient: ApiClient
+      ): ProfileFeature = ProfileFeature(apiClient)
     }
 
-    // TODO: Create provider methods for dependencies created by this Rib. These should be static.
   }
 
   @ProfileScope

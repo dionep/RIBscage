@@ -5,6 +5,9 @@ import com.dionep.ribscage.ui.login.LoginFeature.*
 import com.dionep.ribscage.ui.login.LoginInteractor.*
 import com.uber.rib.core.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 /**
@@ -14,17 +17,24 @@ import javax.inject.Inject
  */
 
 @RibInteractor
-class LoginInteractor : MviInteractor<LoggedOutPresenter, LoginRouter, State, News>() {
+class LoginInteractor : MviInteractor<LoginPresenter, LoginRouter, State, News>() {
 
   @Inject
-  lateinit var presenter: LoggedOutPresenter
+  lateinit var presenter: LoginPresenter
 
   @Inject
   override lateinit var feature: LoginFeature
 
-  fun acceptUiEvent(uiEvents: LoggedOutPresenter.UiEvents) {
+  override fun didBecomeActive(savedInstanceState: Bundle?) {
+    super.didBecomeActive(savedInstanceState)
+    coroutineScope.launch {
+      presenter.startEvent().collect(::handleUiEvent)
+    }
+  }
+
+  private fun handleUiEvent(uiEvents: LoginPresenter.UiEvents) {
     when(uiEvents) {
-      is LoggedOutPresenter.UiEvents.LogIn -> feature.accept(Msg.LogIn(uiEvents.name, uiEvents.password))
+      is LoginPresenter.UiEvents.LogIn -> feature.accept(Msg.LogIn(uiEvents.name, uiEvents.password))
     }
   }
 
@@ -39,11 +49,13 @@ class LoginInteractor : MviInteractor<LoggedOutPresenter, LoginRouter, State, Ne
   /**
    * Presenter interface implemented by this RIB's view.
    */
-  interface LoggedOutPresenter {
+  interface LoginPresenter {
 
     sealed class UiEvents {
       data class LogIn(val name: String, val password: String) : UiEvents()
     }
+
+    fun startEvent(): SharedFlow<UiEvents>
 
   }
 

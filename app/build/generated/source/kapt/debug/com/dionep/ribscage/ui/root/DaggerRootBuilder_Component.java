@@ -2,6 +2,7 @@
 package com.dionep.ribscage.ui.root;
 
 import com.dionep.ribscage.data.ApiClient;
+import com.dionep.ribscage.data.Prefs;
 import com.uber.rib.core.Interactor_MembersInjector;
 import dagger.internal.DoubleCheck;
 import dagger.internal.InstanceFactory;
@@ -53,6 +54,11 @@ public final class DaggerRootBuilder_Component implements RootBuilder.Component 
   @Override
   public ApiClient apiClient() {
     return Preconditions.checkNotNullFromComponent(parentComponent.apiClient());
+  }
+
+  @Override
+  public Prefs prefs() {
+    return Preconditions.checkNotNullFromComponent(parentComponent.prefs());
   }
 
   @Override

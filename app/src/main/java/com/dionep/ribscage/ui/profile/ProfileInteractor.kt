@@ -1,36 +1,32 @@
 package com.dionep.ribscage.ui.profile
 
+import com.dionep.ribscage.base.MviInteractor
+import com.dionep.ribscage.ui.profile.ProfileFeature.*
+import com.dionep.ribscage.ui.profile.ProfileInteractor.*
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
 import javax.inject.Inject
 
-/**
- * Coordinates Business Logic for [ProfileScope].
- *
- * TODO describe the logic of this scope.
- */
 @RibInteractor
-class ProfileInteractor : Interactor<ProfileInteractor.ProfilePresenter, ProfileRouter>() {
+class ProfileInteractor : MviInteractor<ProfilePresenter, ProfileRouter, State, News>() {
 
   @Inject
   lateinit var presenter: ProfilePresenter
 
-  override fun didBecomeActive(savedInstanceState: Bundle?) {
-    super.didBecomeActive(savedInstanceState)
+  @Inject
+  override lateinit var feature: ProfileFeature
 
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
+  interface ProfilePresenter {
+
   }
 
-  override fun willResignActive() {
-    super.willResignActive()
+  override fun renderState(state: State) {
 
-    // TODO: Perform any required clean up here, or delete this method entirely if not needed.
   }
 
-  /**
-   * Presenter interface implemented by this RIB's view.
-   */
-  interface ProfilePresenter
+  override fun handleNews(news: News) {
+
+  }
 
 }
