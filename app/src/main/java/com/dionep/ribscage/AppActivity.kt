@@ -3,9 +3,7 @@ package com.dionep.ribscage
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.ViewGroup
-import com.dionep.ribscage.root.RootBuilder
-import com.dionep.ribscage.root.RootInteractor
-import com.dionep.ribscage.root.RootRouter
+import com.dionep.ribscage.ui.root.RootBuilder
 import com.uber.rib.core.RibActivity
 import com.uber.rib.core.ViewRouter
 

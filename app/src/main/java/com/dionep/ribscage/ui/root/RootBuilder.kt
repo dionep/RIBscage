@@ -1,4 +1,4 @@
-package com.dionep.ribscage.root
+package com.dionep.ribscage.ui.root
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

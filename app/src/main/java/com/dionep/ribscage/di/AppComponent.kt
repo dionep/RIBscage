@@ -5,7 +5,7 @@ import com.dionep.ribscage.App
 import com.dionep.ribscage.AppActivity
 import com.dionep.ribscage.data.Prefs
 import com.dionep.ribscage.di.modules.NetworkModule
-import com.dionep.ribscage.root.RootBuilder
+import com.dionep.ribscage.ui.root.RootBuilder
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.BindsInstance

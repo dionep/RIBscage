@@ -1,4 +1,4 @@
-package com.dionep.ribscage.root
+package com.dionep.ribscage.ui.root
 
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
