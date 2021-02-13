@@ -3,6 +3,7 @@ package com.dionep.ribscage.backend
 import com.dionep.ribscage.backend.config.DatabaseConfig
 import com.dionep.ribscage.backend.repo.UsersRepository
 import com.dionep.ribscage.backend.routes.auth
+import com.dionep.ribscage.backend.routes.profile
 import com.google.gson.GsonBuilder
 import config.JWTConfig
 import io.ktor.application.*
@@ -40,6 +41,7 @@ fun Application.module() {
     install(CallLogging)
     install(Routing) {
         auth()
+        profile()
     }
 
     DatabaseConfig.connect()
