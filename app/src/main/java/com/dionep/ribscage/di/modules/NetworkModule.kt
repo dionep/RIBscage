@@ -34,11 +34,9 @@ class NetworkModule {
             writeTimeout(10, TimeUnit.SECONDS)
             readTimeout(10, TimeUnit.SECONDS)
             retryOnConnectionFailure(true)
-            if (BuildConfig.DEBUG) {
-                addNetworkInterceptor(
-                    HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
-                )
-            }
+            addNetworkInterceptor(
+                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+            )
             build()
         }
 

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dionep.ribscage.data.ApiClient
 import com.dionep.ribscage.data.Prefs
+import com.dionep.ribscage.ui.root.RootRouter
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.BindsInstance
@@ -30,6 +31,7 @@ class LoginBuilder(dependency: ParentComponent) : ViewBuilder<LoginView, LoginRo
   interface ParentComponent {
     fun apiClient(): ApiClient
     fun prefs(): Prefs
+    fun rootRouter(): RootRouter
   }
 
   @dagger.Module

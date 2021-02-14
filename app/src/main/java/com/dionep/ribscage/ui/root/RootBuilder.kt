@@ -6,6 +6,7 @@ import com.dionep.ribscage.R
 import com.dionep.ribscage.data.ApiClient
 import com.dionep.ribscage.data.Prefs
 import com.dionep.ribscage.ui.login.LoginBuilder
+import com.dionep.ribscage.ui.profile.ProfileBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -53,7 +54,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
           view: RootView,
           interactor: RootInteractor
       ): RootRouter {
-        return RootRouter(view, interactor, component, LoginBuilder(component))
+        return RootRouter(view, interactor, component, LoginBuilder(component), ProfileBuilder(component))
       }
     }
 
@@ -67,6 +68,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
   interface Component :
     InteractorBaseComponent<RootInteractor>,
     LoginBuilder.ParentComponent,
+    ProfileBuilder.ParentComponent,
     BuilderComponent {
 
     @dagger.Component.Builder
@@ -81,8 +83,6 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
 
       fun build(): Component
     }
-
-
 
   }
 
