@@ -45,7 +45,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun gson(): Gson = GsonBuilder().create()
+    fun gson(): Gson = GsonBuilder().setLenient().create()
 
     @Provides
     @Singleton
