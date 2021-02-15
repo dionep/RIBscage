@@ -41,7 +41,14 @@ class RootRouter(
             }
             loginRouter = router
             attachChild(router)
-            view.addView(router.view)
+            view.addView(
+                router.view.apply {
+                    alpha = 0f
+                    animate()
+                        .setDuration(300)
+                        .alpha(1f)
+                }
+            )
         }
     }
 

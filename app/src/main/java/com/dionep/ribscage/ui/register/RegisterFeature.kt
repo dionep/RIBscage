@@ -7,6 +7,9 @@ import com.dionep.ribscage.data.ApiClient
 import com.dionep.ribscage.ui.register.RegisterFeature.*
 import com.dionep.ribscage.utils.awaitFolding
 import com.dionep.ribscage.utils.jsonRequestBodyOf
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOf
 
 class RegisterFeature(
@@ -27,7 +30,7 @@ class RegisterFeature(
     },
      commandHandler = { cmd ->
          when (cmd) {
-             is Cmd.Register -> flowOf(
+             is Cmd.Register ->
                  apiClient.registerAsync(
                      jsonRequestBodyOf(
                          "name" to cmd.name,
@@ -37,7 +40,6 @@ class RegisterFeature(
                      { SideEffect(Msg.StopLoading, News.RegisterSuccess) },
                      { SideEffect(Msg.StopLoading, News.Failure(it.message ?: "Error occured")) }
                  )
-             )
          }
      }
 ) {

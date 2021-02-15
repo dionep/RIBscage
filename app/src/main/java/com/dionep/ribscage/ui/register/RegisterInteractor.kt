@@ -24,7 +24,8 @@ class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, Stat
 
   override fun handleUiEvent(uiEvent: UiEvents) {
     when (uiEvent) {
-      UiEvents.Back -> rootRouter.attachLogin()
+      is UiEvents.Back -> rootRouter.attachLogin()
+      is UiEvents.Register -> feature.accept(RegisterFeature.Msg.Register(uiEvent.name, uiEvent.password))
     }
   }
 
@@ -42,6 +43,7 @@ class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, Stat
 
     sealed class UiEvents {
       object Back : UiEvents()
+      data class Register(val name: String, val password: String) : UiEvents()
     }
 
   }

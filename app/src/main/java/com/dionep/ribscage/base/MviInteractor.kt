@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 abstract class MviInteractor<P, R: ViewRouter<*, *, *>, State, News, UiEvents>: Interactor<P, R>() {
 
   private val job = SupervisorJob()
-  val coroutineScope: CoroutineScope
+  private val coroutineScope: CoroutineScope
     get() = CoroutineScope(Dispatchers.Main + job)
 
   abstract val feature: Feature<State, *, *, News>
@@ -23,13 +23,10 @@ abstract class MviInteractor<P, R: ViewRouter<*, *, *>, State, News, UiEvents>: 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
     coroutineScope.launch {
-      feature.stateFlow
-          .collect(::renderState)
+      feature.stateFlow.collect(::renderState)
     }
     coroutineScope.launch {
-      for (news in feature.newsReceiveChannel) {
-        handleNews(news)
-      }
+      feature.newsReceiveChannel.collect(::handleNews)
     }
     coroutineScope.launch {
       presenter.uiEvents().collect(::handleUiEvent)

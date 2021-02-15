@@ -36,13 +36,12 @@ class ProfileFeature(
     },
     commandHandler = { cmd ->
         when (cmd) {
-            Cmd.LoadProfile -> flowOf(
+            Cmd.LoadProfile ->
                 apiClient.getProfileAsync()
                     .awaitFolding(
                         { SideEffect(Msg.SetProfile(it)) },
                         { SideEffect(Msg.SetErrorState, News.Failure(it.message ?: "Error")) }
                     )
-            )
         }
     }
 ) {

@@ -30,20 +30,19 @@ class LoginFeature(
     },
     commandHandler = { cmd ->
         when (cmd) {
-            is Cmd.LogIn -> flowOf(
-                apiClient.loginAsync(
-                    jsonRequestBodyOf(
-                        "name" to cmd.name,
-                        "password" to cmd.password
+            is Cmd.LogIn ->
+                    apiClient.loginAsync(
+                        jsonRequestBodyOf(
+                            "name" to cmd.name,
+                            "password" to cmd.password
+                        )
+                    ).awaitFolding(
+                        {
+                            prefs.authToken = it
+                            SideEffect(Msg.StopLoading, News.LoginSuccess)
+                        },
+                        { SideEffect(Msg.StopLoading, News.Failure(it.message ?: "Error occured")) }
                     )
-                ).awaitFolding(
-                    {
-                        prefs.authToken = it
-                        SideEffect(Msg.StopLoading, News.LoginSuccess)
-                    },
-                    { SideEffect(Msg.StopLoading, News.Failure(it.message ?: "Error occured")) }
-                )
-            )
         }
     }
 ) {
