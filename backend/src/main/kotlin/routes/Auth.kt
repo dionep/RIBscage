@@ -15,9 +15,11 @@ fun Route.auth() {
 
     post("/login") {
         val request = call.receive<AuthResult>()
-        if (request.name == "test")
-            call.respond(HttpStatusCode.OK)
-        else call.respond(HttpStatusCode.Unauthorized)
+        repo.getUser(request.name)?.let {
+            if (it.password == request.password)
+                call.respond(JWTConfig.makeToken(it))
+            else call.respond(HttpStatusCode.Unauthorized)
+        } ?: kotlin.run { call.respond(HttpStatusCode.NotFound) }
     }
 
     post("register") {

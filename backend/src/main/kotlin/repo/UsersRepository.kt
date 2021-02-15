@@ -27,6 +27,13 @@ class UsersRepository {
             .singleOrNull()
     }
 
+    suspend fun getUser(name: String): User? = dbQuery {
+        Users
+            .select { (Users.name eq name) }
+            .mapNotNull { toUser(it) }
+            .singleOrNull()
+    }
+
     private fun toUser(row: ResultRow) = User(
         id = row[Users.id],
         name = row[Users.name],
