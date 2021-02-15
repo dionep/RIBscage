@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import kotlinx.coroutines.flow.MutableSharedFlow
 
-abstract class MviView<UiEvents>(
+abstract class MviView<UiEvents> @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0

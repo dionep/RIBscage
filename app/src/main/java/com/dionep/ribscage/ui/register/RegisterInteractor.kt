@@ -1,35 +1,42 @@
 package com.dionep.ribscage.ui.register
 
+import com.dionep.mvi.Feature
+import com.dionep.ribscage.base.MviInteractor
+import com.dionep.ribscage.ui.register.RegisterFeature.*
+import com.dionep.ribscage.ui.register.RegisterInteractor.*
+import com.dionep.ribscage.ui.root.RootRouter
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
 import javax.inject.Inject
 
-/**
- * Coordinates Business Logic for [RegisterScope].
- *
- * TODO describe the logic of this scope.
- */
 @RibInteractor
-class RegisterInteractor : Interactor<RegisterInteractor.RegisterPresenter, RegisterRouter>() {
+class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, State, News>() {
 
   @Inject
   lateinit var presenter: RegisterPresenter
 
-  override fun didBecomeActive(savedInstanceState: Bundle?) {
-    super.didBecomeActive(savedInstanceState)
+  @Inject
+  override lateinit var feature: RegisterFeature
 
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
+  @Inject
+  lateinit var rootRouter: RootRouter
+
+  override fun renderState(state: State) {
   }
 
-  override fun willResignActive() {
-    super.willResignActive()
-
-    // TODO: Perform any required clean up here, or delete this method entirely if not needed.
+  override fun handleNews(news: News) {
+    when (news) {
+//      is News.Failure -> TODO()
+      is News.RegisterSuccess -> rootRouter.attachProfile()
+    }
   }
 
-  /**
-   * Presenter interface implemented by this RIB's view.
-   */
-  interface RegisterPresenter
+  interface RegisterPresenter {
+
+
+    sealed class UiEvents {
+    }
+  }
+
 }

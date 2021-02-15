@@ -48,7 +48,6 @@ class LoginFeature(
     }
 ) {
 
-
     data class State(
         val isLoading: Boolean = false
     )

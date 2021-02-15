@@ -2,6 +2,8 @@ package com.dionep.ribscage.ui.register
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.dionep.ribscage.data.ApiClient
+import com.dionep.ribscage.ui.root.RootRouter
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -12,19 +14,8 @@ import java.lang.annotation.RetentionPolicy.CLASS
 import javax.inject.Qualifier
 import javax.inject.Scope
 
-/**
- * Builder for the {@link RegisterScope}.
- *
- * TODO describe this scope's responsibility as a whole.
- */
 class RegisterBuilder(dependency: ParentComponent) : ViewBuilder<RegisterView, RegisterRouter, RegisterBuilder.ParentComponent>(dependency) {
 
-  /**
-   * Builds a new [RegisterRouter].
-   *
-   * @param parentViewGroup parent view group that this router's view will be added to.
-   * @return a new [RegisterRouter].
-   */
   fun build(parentViewGroup: ViewGroup): RegisterRouter {
     val view = createView(parentViewGroup)
     val interactor = RegisterInteractor()
@@ -36,14 +27,12 @@ class RegisterBuilder(dependency: ParentComponent) : ViewBuilder<RegisterView, R
     return component.registerRouter()
   }
 
-  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): RegisterView? {
-    // TODO: Inflate a new view using the provided inflater, or create a new view programatically using the
-    // provided context from the parentViewGroup.
-    return null
-  }
+  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): RegisterView =
+      RegisterView(parentViewGroup.context)
 
   interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
+    fun apiClient(): ApiClient
+    fun rootRouter(): RootRouter
   }
 
   @dagger.Module
@@ -65,9 +54,16 @@ class RegisterBuilder(dependency: ParentComponent) : ViewBuilder<RegisterView, R
           interactor: RegisterInteractor): RegisterRouter {
         return RegisterRouter(view, interactor, component)
       }
+
+      @RegisterScope
+      @Provides
+      @JvmStatic
+      internal fun feature(
+          apiClient: ApiClient
+      ) = RegisterFeature(apiClient)
+
     }
 
-    // TODO: Create provider methods for dependencies created by this Rib. These should be static.
   }
 
   @RegisterScope
