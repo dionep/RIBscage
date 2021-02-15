@@ -1,13 +1,14 @@
 package com.dionep.ribscage.ui.register
 
-import com.dionep.mvi.Feature
 import com.dionep.ribscage.base.MviInteractor
-import com.dionep.ribscage.ui.register.RegisterFeature.*
-import com.dionep.ribscage.ui.register.RegisterInteractor.*
+import com.dionep.ribscage.ui.login.LoginInteractor
+import com.dionep.ribscage.ui.login.LoginInteractor.*
+import com.dionep.ribscage.ui.register.RegisterFeature.News
+import com.dionep.ribscage.ui.register.RegisterFeature.State
+import com.dionep.ribscage.ui.register.RegisterInteractor.RegisterPresenter
 import com.dionep.ribscage.ui.root.RootRouter
-import com.uber.rib.core.Bundle
-import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
+import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
 @RibInteractor
@@ -36,7 +37,10 @@ class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, Stat
 
 
     sealed class UiEvents {
+      object Back : UiEvents()
     }
+
+    fun uiEvents(): SharedFlow<UiEvents>
   }
 
 }

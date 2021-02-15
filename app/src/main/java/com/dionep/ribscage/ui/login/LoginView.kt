@@ -26,6 +26,6 @@ class LoginView(
         }
     }
 
-    override fun startEvent(): SharedFlow<UiEvents> = eventsFlow.asSharedFlow()
+    override fun uiEvents(): SharedFlow<UiEvents> = eventsFlow.asSharedFlow()
 
 }

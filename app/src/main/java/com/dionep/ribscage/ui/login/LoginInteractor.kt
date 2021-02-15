@@ -1,21 +1,22 @@
 package com.dionep.ribscage.ui.login
 
+import com.dionep.ribscage.base.BasePresenter
 import com.dionep.ribscage.base.MviInteractor
 import com.dionep.ribscage.ui.login.LoginFeature.*
 import com.dionep.ribscage.ui.login.LoginInteractor.*
+import com.dionep.ribscage.ui.login.LoginInteractor.LoginPresenter.*
 import com.dionep.ribscage.ui.root.RootRouter
 import com.uber.rib.core.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @RibInteractor
-class LoginInteractor : MviInteractor<LoginPresenter, LoginRouter, State, News>() {
+class LoginInteractor : MviInteractor<LoginPresenter, LoginRouter, State, News, UiEvents>() {
 
   @Inject
-  lateinit var presenter: LoginPresenter
+  override lateinit var presenter: LoginPresenter
 
   @Inject
   override lateinit var feature: LoginFeature
@@ -23,17 +24,10 @@ class LoginInteractor : MviInteractor<LoginPresenter, LoginRouter, State, News>(
   @Inject
   lateinit var rootRouter: RootRouter
 
-  override fun didBecomeActive(savedInstanceState: Bundle?) {
-    super.didBecomeActive(savedInstanceState)
-    coroutineScope.launch {
-      presenter.startEvent().collect(::handleUiEvent)
-    }
-  }
-
-  private fun handleUiEvent(uiEvents: LoginPresenter.UiEvents) {
-    when(uiEvents) {
-      is LoginPresenter.UiEvents.LogIn -> feature.accept(Msg.LogIn(uiEvents.name, uiEvents.password))
-      is LoginPresenter.UiEvents.ToRegister -> rootRouter.attachRegister()
+  override fun handleUiEvent(uiEvent: UiEvents) {
+    when(uiEvent) {
+      is UiEvents.LogIn -> feature.accept(Msg.LogIn(uiEvent.name, uiEvent.password))
+      is UiEvents.ToRegister -> rootRouter.attachRegister()
     }
   }
 
@@ -48,14 +42,12 @@ class LoginInteractor : MviInteractor<LoginPresenter, LoginRouter, State, News>(
     }
   }
 
-  interface LoginPresenter {
+  interface LoginPresenter: BasePresenter<UiEvents> {
 
     sealed class UiEvents {
       data class LogIn(val name: String, val password: String) : UiEvents()
       object ToRegister : UiEvents()
     }
-
-    fun startEvent(): SharedFlow<UiEvents>
 
   }
 

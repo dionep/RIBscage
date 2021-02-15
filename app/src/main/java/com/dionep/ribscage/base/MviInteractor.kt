@@ -11,29 +11,34 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Suppress("FINITE_BOUNDS_VIOLATION_IN_JAVA")
-abstract class MviInteractor<P, R: ViewRouter<*, *, *>, State, News>: Interactor<P, R>() {
+abstract class MviInteractor<P, R: ViewRouter<*, *, *>, State, News, UiEvents>: Interactor<P, R>() {
 
   private val job = SupervisorJob()
   val coroutineScope: CoroutineScope
     get() = CoroutineScope(Dispatchers.Main + job)
 
   abstract val feature: Feature<State, *, *, News>
+  abstract val presenter: BasePresenter<UiEvents>
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
     coroutineScope.launch {
       feature.stateFlow
-          .collect { renderState(it) }
+          .collect(::renderState)
     }
     coroutineScope.launch {
       for (news in feature.newsReceiveChannel) {
         handleNews(news)
       }
     }
+    coroutineScope.launch {
+      presenter.uiEvents().collect(::handleUiEvent)
+    }
   }
 
   abstract fun renderState(state: State)
   abstract fun handleNews(news: News)
+  abstract fun handleUiEvent(uiEvent: UiEvents)
 
   override fun willResignActive() {
     super.willResignActive()
