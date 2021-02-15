@@ -1,7 +1,5 @@
 package com.dionep.ribscage.ui.profile
 
-import android.view.View
-
 import com.uber.rib.core.ViewRouter
 
 /**

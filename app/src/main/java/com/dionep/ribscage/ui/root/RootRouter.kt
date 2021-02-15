@@ -1,5 +1,6 @@
 package com.dionep.ribscage.ui.root
 
+import android.view.View
 import com.dionep.ribscage.ui.login.LoginBuilder
 import com.dionep.ribscage.ui.login.LoginRouter
 import com.dionep.ribscage.ui.profile.ProfileBuilder
@@ -9,11 +10,7 @@ import com.dionep.ribscage.ui.register.RegisterRouter
 
 import com.uber.rib.core.ViewRouter
 
-/**
- * Adds and removes children of {@link RootBuilder.RootScope}.
- *
- * TODO describe the possible child configurations of this scope.
- */
+
 class RootRouter(
     view: RootView,
     interactor: RootInteractor,
@@ -31,24 +28,17 @@ class RootRouter(
         loginBuilder.build(view).let { router ->
             profileRouter?.let {
                 detachChild(it)
-                view.removeView(it.view)
+                it.view.animateDisappearing { view.removeView(it) }
                 profileRouter = null
             }
             registerRouter?.let {
                 detachChild(it)
-                view.removeView(it.view)
+                it.view.animateDisappearing { view.removeView(it) }
                 registerRouter = null
             }
             loginRouter = router
             attachChild(router)
-            view.addView(
-                router.view.apply {
-                    alpha = 0f
-                    animate()
-                        .setDuration(300)
-                        .alpha(1f)
-                }
-            )
+            view.addView(router.view.animateAppearing())
         }
     }
 
@@ -56,17 +46,17 @@ class RootRouter(
         profileBuilder.build(view).let { router ->
             loginRouter?.let {
                 detachChild(it)
-                view.removeView(it.view)
+                it.view.animateDisappearing { view.removeView(it) }
                 loginRouter = null
             }
             registerRouter?.let {
                 detachChild(it)
-                view.removeView(it.view)
+                it.view.animateDisappearing { view.removeView(it) }
                 registerRouter = null
             }
             profileRouter = router
             attachChild(router)
-            view.addView(router.view)
+            view.addView(router.view.animateAppearing())
         }
     }
 
@@ -74,13 +64,30 @@ class RootRouter(
         registerBuilder.build(view).let { router ->
             loginRouter?.let {
                 detachChild(it)
-                view.removeView(it.view)
+                it.view.animateDisappearing { view.removeView(it) }
                 loginRouter = null
             }
             registerRouter = router
             attachChild(router)
-            view.addView(router.view)
+            view.addView(router.view.animateAppearing())
         }
+    }
+
+    fun View.animateAppearing(): View = this.apply {
+        alpha = 0f
+        animate()
+            .setDuration(500)
+            .alpha(1f)
+    }
+
+    fun View.animateDisappearing(
+        endWithAction: (View) -> Unit
+    ): View = this.apply {
+        alpha = 1f
+        animate()
+            .setDuration(500)
+            .alpha(0f)
+            .withEndAction { endWithAction.invoke(this) }
     }
 
 }
