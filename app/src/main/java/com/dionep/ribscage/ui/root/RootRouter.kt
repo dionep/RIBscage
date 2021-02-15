@@ -34,6 +34,11 @@ class RootRouter(
                 view.removeView(it.view)
                 profileRouter = null
             }
+            registerRouter?.let {
+                detachChild(it)
+                view.removeView(it.view)
+                registerRouter = null
+            }
             loginRouter = router
             attachChild(router)
             view.addView(router.view)
