@@ -23,21 +23,15 @@ class ProfileInteractor : MviInteractor<ProfilePresenter, ProfileRouter, State, 
 
   }
 
-  override fun renderState(state: State) {
-    presenter.renderState(state)
-  }
-
   override fun handleNews(news: News) {
     when(news) {
       is News.Failure -> presenter.showMessage(news.message)
     }
   }
 
-  interface ProfilePresenter: BasePresenter<UiEvents> {
+  interface ProfilePresenter: BasePresenter<UiEvents, State> {
 
     sealed class UiEvents()
-
-    fun renderState(state: State)
 
   }
 

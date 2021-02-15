@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.view.isVisible
 import com.dionep.ribscage.base.MviView
 import com.dionep.ribscage.databinding.RibRegisterBinding
+import com.dionep.ribscage.ui.register.RegisterFeature.*
 import com.dionep.ribscage.ui.register.RegisterInteractor.*
 import com.dionep.ribscage.ui.register.RegisterInteractor.RegisterPresenter.*
 import kotlinx.coroutines.flow.SharedFlow
@@ -15,7 +17,7 @@ import kotlinx.coroutines.flow.SharedFlow
  */
 class RegisterView(
     context: Context
-) : MviView<UiEvents>(context), RegisterPresenter {
+) : MviView<UiEvents, State>(context), RegisterPresenter {
 
     private val viewBinding = RibRegisterBinding.inflate(LayoutInflater.from(context), this, true)
 
@@ -30,8 +32,8 @@ class RegisterView(
         }
     }
 
-    override fun renderState(state: RegisterFeature.State) {
-
+    override fun renderState(state: State) {
+        viewBinding.loading.isVisible = state.isLoading
     }
 
 }

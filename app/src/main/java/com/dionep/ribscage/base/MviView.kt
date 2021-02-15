@@ -7,13 +7,13 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
-abstract class MviView<UiEvents> @JvmOverloads constructor(
+abstract class MviView<UiEvents, State> @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : FrameLayout(context, attrs, defStyle), BasePresenter<UiEvents> {
+) : FrameLayout(context, attrs, defStyle), BasePresenter<UiEvents, State> {
 
-    val eventsFlow = MutableSharedFlow<UiEvents>(extraBufferCapacity = 64)
+    private val eventsFlow = MutableSharedFlow<UiEvents>(extraBufferCapacity = 64)
 
     override fun uiEvents(): SharedFlow<UiEvents> = eventsFlow
 

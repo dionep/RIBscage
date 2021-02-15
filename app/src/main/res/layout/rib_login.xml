@@ -1,44 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+<FrameLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        app:title="@string/login"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"/>
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_name"
-        android:hint="@string/enter_name"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            app:title="@string/login"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_name"
+            android:hint="@string/enter_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_password"
+            android:hint="@string/enter_password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:text="@string/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"/>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:text="@string/register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"/>
+
+    </LinearLayout>
+
+    <com.dionep.ribscage.widgets.Loading
+        android:id="@+id/loading"
+        tools:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
+        android:layout_height="match_parent"/>
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_password"
-        android:hint="@string/enter_password"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
-
-    <Button
-        android:id="@+id/btn_login"
-        android:text="@string/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
-
-    <Button
-        android:id="@+id/btn_register"
-        android:text="@string/register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
-
-</LinearLayout>
+</FrameLayout>
