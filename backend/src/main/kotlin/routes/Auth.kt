@@ -13,7 +13,7 @@ fun Route.auth() {
 
     val repo = UsersRepository()
 
-    post("/login") {
+    post("login") {
         val request = call.receive<AuthResult>()
         repo.getUser(request.name)?.let {
             if (it.password == request.password)

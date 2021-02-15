@@ -9,7 +9,12 @@ import retrofit2.http.POST
 
 interface ApiClient {
 
-    @POST("register")
+    @POST("login")
+    fun loginAsync(
+        @Body body: RequestBody
+    ): Deferred<String>
+
+    @POST("login")
     fun registerAsync(
         @Body body: RequestBody
     ): Deferred<String>

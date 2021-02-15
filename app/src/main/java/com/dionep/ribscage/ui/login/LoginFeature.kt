@@ -31,7 +31,7 @@ class LoginFeature(
     commandHandler = { cmd ->
         when (cmd) {
             is Cmd.LogIn -> flowOf(
-                apiClient.registerAsync(
+                apiClient.loginAsync(
                     jsonRequestBodyOf(
                         "name" to cmd.name,
                         "password" to cmd.password
