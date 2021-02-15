@@ -38,7 +38,7 @@ class LoginInteractor : MviInteractor<LoginPresenter, LoginRouter, State, News, 
   override fun handleNews(news: News) {
     when (news) {
       is News.LoginSuccess -> rootRouter.attachProfile()
-      is News.Failure -> println(news)
+      is News.Failure -> presenter.showMessage(news.message)
     }
   }
 

@@ -20,4 +20,10 @@ class ProfileView(
 
     }
 
+    override fun renderState(state: ProfileFeature.State) {
+        with(viewBinding) {
+            tvName.text = state.profile?.name
+        }
+    }
+
 }

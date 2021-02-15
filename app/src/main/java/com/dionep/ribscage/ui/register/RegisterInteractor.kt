@@ -33,7 +33,7 @@ class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, Stat
 
   override fun handleNews(news: News) {
     when (news) {
-//      is News.Failure -> TODO()
+      is News.Failure -> presenter.showMessage(news.message)
       is News.RegisterSuccess -> rootRouter.attachProfile()
     }
   }
