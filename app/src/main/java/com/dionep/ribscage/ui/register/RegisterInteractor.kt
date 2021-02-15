@@ -1,27 +1,32 @@
 package com.dionep.ribscage.ui.register
 
+import com.dionep.ribscage.base.BasePresenter
 import com.dionep.ribscage.base.MviInteractor
-import com.dionep.ribscage.ui.login.LoginInteractor
-import com.dionep.ribscage.ui.login.LoginInteractor.*
 import com.dionep.ribscage.ui.register.RegisterFeature.News
 import com.dionep.ribscage.ui.register.RegisterFeature.State
 import com.dionep.ribscage.ui.register.RegisterInteractor.RegisterPresenter
+import com.dionep.ribscage.ui.register.RegisterInteractor.RegisterPresenter.*
 import com.dionep.ribscage.ui.root.RootRouter
 import com.uber.rib.core.RibInteractor
-import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
 @RibInteractor
-class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, State, News>() {
+class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, State, News, UiEvents>() {
 
   @Inject
-  lateinit var presenter: RegisterPresenter
+  override lateinit var presenter: RegisterPresenter
 
   @Inject
   override lateinit var feature: RegisterFeature
 
   @Inject
   lateinit var rootRouter: RootRouter
+
+  override fun handleUiEvent(uiEvent: UiEvents) {
+    when (uiEvent) {
+      UiEvents.Back -> rootRouter.attachLogin()
+    }
+  }
 
   override fun renderState(state: State) {
   }
@@ -33,14 +38,12 @@ class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, Stat
     }
   }
 
-  interface RegisterPresenter {
-
+  interface RegisterPresenter: BasePresenter<UiEvents> {
 
     sealed class UiEvents {
       object Back : UiEvents()
     }
 
-    fun uiEvents(): SharedFlow<UiEvents>
   }
 
 }

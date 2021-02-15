@@ -6,8 +6,6 @@ import com.dionep.ribscage.base.MviView
 import com.dionep.ribscage.databinding.RibLoginBinding
 import com.dionep.ribscage.ui.login.LoginInteractor.LoginPresenter
 import com.dionep.ribscage.ui.login.LoginInteractor.LoginPresenter.UiEvents
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 
 class LoginView(
     context: Context
@@ -25,7 +23,5 @@ class LoginView(
             }
         }
     }
-
-    override fun uiEvents(): SharedFlow<UiEvents> = eventsFlow.asSharedFlow()
 
 }

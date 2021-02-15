@@ -11,19 +11,8 @@ import dagger.Provides
 import javax.inject.Qualifier
 import javax.inject.Scope
 
-/**
- * Builder for the {@link ProfileScope}.
- *
- * TODO describe this scope's responsibility as a whole.
- */
 class ProfileBuilder(dependency: ParentComponent) : ViewBuilder<ProfileView, ProfileRouter, ProfileBuilder.ParentComponent>(dependency) {
 
-  /**
-   * Builds a new [ProfileRouter].
-   *
-   * @param parentViewGroup parent view group that this router's view will be added to.
-   * @return a new [ProfileRouter].
-   */
   fun build(parentViewGroup: ViewGroup): ProfileRouter {
     val view = createView(parentViewGroup)
     val interactor = ProfileInteractor()
