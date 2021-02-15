@@ -24,4 +24,8 @@ class LoginView(
         }
     }
 
+    override fun renderState(state: LoginFeature.State) {
+
+    }
+
 }

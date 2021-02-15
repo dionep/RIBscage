@@ -29,9 +29,6 @@ class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, Stat
     }
   }
 
-  override fun renderState(state: State) {
-  }
-
   override fun handleNews(news: News) {
     when (news) {
       is News.Failure -> presenter.showMessage(news.message)
@@ -39,7 +36,7 @@ class RegisterInteractor : MviInteractor<RegisterPresenter, RegisterRouter, Stat
     }
   }
 
-  interface RegisterPresenter: BasePresenter<UiEvents> {
+  interface RegisterPresenter: BasePresenter<UiEvents, State> {
 
     sealed class UiEvents {
       object Back : UiEvents()

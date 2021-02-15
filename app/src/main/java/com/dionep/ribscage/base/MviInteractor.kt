@@ -18,12 +18,12 @@ abstract class MviInteractor<P, R: ViewRouter<*, *, *>, State, News, UiEvents>: 
     get() = CoroutineScope(Dispatchers.Main + job)
 
   abstract val feature: Feature<State, *, *, News>
-  abstract val presenter: BasePresenter<UiEvents>
+  abstract val presenter: BasePresenter<UiEvents, State>
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
     coroutineScope.launch {
-      feature.stateFlow.collect(::renderState)
+      feature.stateFlow.collect(presenter::renderState)
     }
     coroutineScope.launch {
       feature.newsReceiveChannel.collect(::handleNews)
@@ -33,7 +33,6 @@ abstract class MviInteractor<P, R: ViewRouter<*, *, *>, State, News, UiEvents>: 
     }
   }
 
-  abstract fun renderState(state: State)
   abstract fun handleNews(news: News)
   abstract fun handleUiEvent(uiEvent: UiEvents)
 

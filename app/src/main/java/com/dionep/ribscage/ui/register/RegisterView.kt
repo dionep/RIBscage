@@ -24,7 +24,14 @@ class RegisterView(
             toolbar.setNavigationOnClickListener {
                 acceptEvent(UiEvents.Back)
             }
+            btnRegister.setOnClickListener {
+                acceptEvent(UiEvents.Register(etName.text.toString(), etPassword.text.toString()))
+            }
         }
+    }
+
+    override fun renderState(state: RegisterFeature.State) {
+
     }
 
 }

@@ -31,10 +31,6 @@ class LoginInteractor : MviInteractor<LoginPresenter, LoginRouter, State, News, 
     }
   }
 
-  override fun renderState(state: State) {
-    println(state)
-  }
-
   override fun handleNews(news: News) {
     when (news) {
       is News.LoginSuccess -> rootRouter.attachProfile()
@@ -42,7 +38,7 @@ class LoginInteractor : MviInteractor<LoginPresenter, LoginRouter, State, News, 
     }
   }
 
-  interface LoginPresenter: BasePresenter<UiEvents> {
+  interface LoginPresenter: BasePresenter<UiEvents, State> {
 
     sealed class UiEvents {
       data class LogIn(val name: String, val password: String) : UiEvents()
