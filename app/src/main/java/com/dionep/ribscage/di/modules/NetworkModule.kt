@@ -1,6 +1,5 @@
 package com.dionep.ribscage.di.modules
 
-import com.dionep.ribscage.BuildConfig
 import com.dionep.ribscage.Constants
 import com.dionep.ribscage.data.ApiClient
 import com.dionep.ribscage.data.Prefs

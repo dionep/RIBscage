@@ -4,6 +4,7 @@ import com.dionep.mvi.Feature
 import com.dionep.mvi.SideEffect
 import com.dionep.mvi.Update
 import com.dionep.ribscage.data.ApiClient
+import com.dionep.ribscage.data.Prefs
 import com.dionep.ribscage.ui.register.RegisterFeature.*
 import com.dionep.ribscage.utils.awaitFolding
 import com.dionep.ribscage.utils.jsonRequestBodyOf
@@ -13,7 +14,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOf
 
 class RegisterFeature(
-    apiClient: ApiClient
+    apiClient: ApiClient,
+    prefs: Prefs
 ) : Feature<State, Cmd, Msg, News>(
     initialState = State(),
     reducer = { msg, state ->
@@ -37,7 +39,10 @@ class RegisterFeature(
                          "password" to cmd.password
                      )
                  ).awaitFolding(
-                     { SideEffect(Msg.StopLoading, News.RegisterSuccess) },
+                     {
+                         prefs.authToken = it
+                         SideEffect(Msg.StopLoading, News.RegisterSuccess)
+                     },
                      { SideEffect(Msg.StopLoading, News.Failure(it.message ?: "Error occured")) }
                  )
          }

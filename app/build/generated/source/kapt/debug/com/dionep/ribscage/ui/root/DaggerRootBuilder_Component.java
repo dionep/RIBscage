@@ -52,13 +52,13 @@ public final class DaggerRootBuilder_Component implements RootBuilder.Component 
   }
 
   @Override
-  public Prefs prefs() {
-    return Preconditions.checkNotNullFromComponent(parentComponent.prefs());
+  public ApiClient apiClient() {
+    return Preconditions.checkNotNullFromComponent(parentComponent.apiClient());
   }
 
   @Override
-  public ApiClient apiClient() {
-    return Preconditions.checkNotNullFromComponent(parentComponent.apiClient());
+  public Prefs prefs() {
+    return Preconditions.checkNotNullFromComponent(parentComponent.prefs());
   }
 
   @Override

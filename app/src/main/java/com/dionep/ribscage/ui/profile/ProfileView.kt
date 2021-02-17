@@ -9,9 +9,6 @@ import com.dionep.ribscage.ui.profile.ProfileFeature.*
 import com.dionep.ribscage.ui.profile.ProfileInteractor.*
 import com.dionep.ribscage.ui.profile.ProfileInteractor.ProfilePresenter.*
 
-/**
- * Top level view for {@link ProfileBuilder.ProfileScope}.
- */
 class ProfileView(
     context: Context
 ) : MviView<UiEvents, State>(context), ProfilePresenter {

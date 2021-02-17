@@ -12,7 +12,7 @@ class AuthHeaderInterceptor(
         val token = prefs.authToken
         return chain.proceed(
             with(chain.request().newBuilder()) {
-                if (!token.isNullOrEmpty()) addHeader("auth-token", token)
+                if (!token.isNullOrEmpty()) addHeader("Authorization", "Bearer $token")
                 build()
             }
         )

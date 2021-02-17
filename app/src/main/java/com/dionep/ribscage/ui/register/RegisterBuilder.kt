@@ -3,6 +3,7 @@ package com.dionep.ribscage.ui.register
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dionep.ribscage.data.ApiClient
+import com.dionep.ribscage.data.Prefs
 import com.dionep.ribscage.ui.root.RootRouter
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
@@ -33,6 +34,7 @@ class RegisterBuilder(dependency: ParentComponent) : ViewBuilder<RegisterView, R
   interface ParentComponent {
     fun apiClient(): ApiClient
     fun rootRouter(): RootRouter
+    fun prefs(): Prefs
   }
 
   @dagger.Module
@@ -59,8 +61,9 @@ class RegisterBuilder(dependency: ParentComponent) : ViewBuilder<RegisterView, R
       @Provides
       @JvmStatic
       internal fun feature(
-          apiClient: ApiClient
-      ) = RegisterFeature(apiClient)
+          apiClient: ApiClient,
+          prefs: Prefs
+      ) = RegisterFeature(apiClient, prefs)
 
     }
 

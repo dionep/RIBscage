@@ -9,9 +9,10 @@ import io.ktor.routing.*
 
 fun Route.profile() {
 
-    get("profile") {
-        val principal = call.principal<User>()
-        call.respond(principal ?: HttpStatusCode.Unauthorized)
+    authenticate {
+        get("profile") {
+            call.respond(call.principal<User>() ?: HttpStatusCode.Unauthorized)
+        }
     }
 
 }

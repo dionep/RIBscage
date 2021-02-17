@@ -18,7 +18,7 @@ object JWTConfig {
         .build()
 
     fun makeToken(user: User): String = JWT.create()
-        .withSubject("auth-token")
+        .withSubject("Authentication")
         .withIssuer(issuer)
         .withClaim("id", user.id)
         .withExpiresAt(getExpiration())

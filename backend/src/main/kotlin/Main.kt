@@ -25,6 +25,15 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    install(Authentication) {
+        val repo = UsersRepository()
+        jwt {
+            verifier(JWTConfig.verifier)
+            realm = "ktor.io"
+            validate { it.payload.getClaim("id").asInt()?.let(repo::getUser) }
+        }
+    }
+
     install(ContentNegotiation) {
         register(
             ContentType.Application.Json,
@@ -39,19 +48,11 @@ fun Application.module() {
 
     install(DefaultHeaders)
     install(CallLogging)
-    install(Routing) {
-        auth()
-        profile()
-    }
 
     DatabaseConfig.connect()
 
-    install(Authentication) {
-        val repo = UsersRepository()
-        jwt {
-            verifier(JWTConfig.verifier)
-            realm = "ktor.io"
-            validate { it.payload.getClaim("id").asInt()?.let(repo::getUser) }
-        }
+    install(Routing) {
+        auth()
+        profile()
     }
 }
