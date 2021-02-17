@@ -3,6 +3,8 @@ package com.dionep.ribscage.ui.profile
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dionep.ribscage.data.ApiClient
+import com.dionep.ribscage.data.Prefs
+import com.dionep.ribscage.ui.root.RootRouter
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -29,6 +31,8 @@ class ProfileBuilder(dependency: ParentComponent) : ViewBuilder<ProfileView, Pro
 
   interface ParentComponent {
     fun apiClient(): ApiClient
+    fun prefs(): Prefs
+    fun rootRouter(): RootRouter
   }
 
   @dagger.Module

@@ -22,6 +22,7 @@ class ProfileView(
         with(viewBinding) {
             loading.isVisible = state.isLoading
             tvName.text = state.profile?.name
+            tvExit.setOnClickListener { acceptEvent(UiEvents.Exit) }
         }
     }
 

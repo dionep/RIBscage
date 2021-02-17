@@ -14,7 +14,7 @@ interface ApiClient {
         @Body body: RequestBody
     ): Deferred<String>
 
-    @POST("login")
+    @POST("register")
     fun registerAsync(
         @Body body: RequestBody
     ): Deferred<String>
