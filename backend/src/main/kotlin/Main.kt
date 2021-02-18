@@ -3,6 +3,7 @@ package com.dionep.ribscage.backend
 import com.dionep.ribscage.backend.config.DatabaseConfig
 import com.dionep.ribscage.backend.repo.UsersRepository
 import com.dionep.ribscage.backend.routes.auth
+import com.dionep.ribscage.backend.routes.posts
 import com.dionep.ribscage.backend.routes.profile
 import com.google.gson.GsonBuilder
 import config.JWTConfig
@@ -54,5 +55,6 @@ fun Application.module() {
     install(Routing) {
         auth()
         profile()
+        posts()
     }
 }

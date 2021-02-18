@@ -1,6 +1,6 @@
 package com.dionep.ribscage.backend.routes
 
-import com.dionep.ribscage.backend.entity.AuthResult
+import com.dionep.ribscage.backend.entity.request.AuthRequest
 import com.dionep.ribscage.backend.repo.UsersRepository
 import config.JWTConfig
 import io.ktor.application.*
@@ -14,7 +14,7 @@ fun Route.auth() {
     val repo = UsersRepository()
 
     post("login") {
-        val request = call.receive<AuthResult>()
+        val request = call.receive<AuthRequest>()
         repo.getUser(request.name)?.let {
             if (it.password == request.password)
                 call.respond(JWTConfig.makeToken(it))
@@ -23,7 +23,7 @@ fun Route.auth() {
     }
 
     post("register") {
-        val request = call.receive<AuthResult>()
+        val request = call.receive<AuthRequest>()
         repo.makeUser(
             name = request.name,
             pass = request.password
